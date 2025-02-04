@@ -1,0 +1,45 @@
+# Ignore common Python development files and directories
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.pyz
+*.pyw
+*.pyi
+.idea/
+
+# Exclude build artifacts
+*.egg-info/
+dist/
+build/
+target/
+
+# Ignore coverage related files and directories
+.coverage
+htmlcov/
+.coverage.*
+.tox/
+.nox/
+
+# Ignore GitHub related files and directories
+.github/
+
+# Ignore pre-commit related files and directories
+.pre-commit-config.yaml
+.pre-commit/
+
+# Ignore PyCharm related files and directories
+*.iml
+
+# Ignore Visual Studio Code related files and directories
+.vscode/
+
+# Ignore virtual environment folders
+.venv/
+env/
+.ENV/
+
+# Etc
+mypy.ini
+.flake8
+.editorconfig

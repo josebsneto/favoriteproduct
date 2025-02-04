@@ -1,0 +1,89 @@
+[tool.poetry]
+name = "favoriteproduct"
+version = "0.1.0"
+description = "Client favorite product list registration backend"
+authors = ["José B. Neto <josebernardinoneto@gmail.com>"]
+license = "LICENSE.txt"
+readme = "README.md"
+packages = [{ include = "app" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["standard"], version = "^0.115.8"}
+motor = "^3.7.0"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+pyjwt = "^2.10.1"
+aiohttp = "^3.11.11"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+httpx = "^0.28.1"
+pytest-asyncio = "^0.25.3"
+pytest-randomly = "^3.16.0"
+pre-commit = "^4.1.0"
+pre-commit-hooks = "^5.0.0"
+pyupgrade = "^3.19.1"
+black = "^25.1.0"
+isort = "^6.0.0"
+flake8 = "^7.1.1"
+mypy = "^1.14.1"
+bandit = "^1.8.2"
+vulture = "^2.14"
+coverage = "^7.6.10"
+pytest-mock = "^3.14.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 80
+target-version = ['py312']
+include_trailing_comma = true
+
+[flake8]
+max-line-length = 80
+max-complexity = 10
+
+[tool.isort]
+profile = "black"
+line_length = 80
+multi_line_output = 3
+
+[tool.mypy]
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+disallow_any_explicit = false
+plugins = "pydantic.mypy"
+
+[tool.vulture]
+min_confidence = 100
+exclude = ["/app/entrypoints/fastapi/exceptions/handlers.py"]
+
+[tool.bandit]
+skips = ["B101", "B601"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["app/"]
+omit = [
+    "*__init__*",
+    "app/settings.py",
+    "app/entrypoints/fastapi/main.py",
+    "app/entrypoints/factories.py",
+    "requirements/*",
+    "tasks.py",
+]
+
+[tool.coverage.report]
+fail_under = 80
+ignore_errors = true

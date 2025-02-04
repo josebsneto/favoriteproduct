@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  web:
+    image: favoriteproduct
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - web_db
+
+  web_db:
+    image: mongo
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+
+volumes:
+  mongodb_data:
